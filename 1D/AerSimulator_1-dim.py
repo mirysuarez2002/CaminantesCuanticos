@@ -20,7 +20,7 @@ directorio = os.path.dirname(__file__)
 ruta = os.path.join(directorio,archivo)
 
 #Se define el circuito cuántico con los cúbits de posición más un cúbit moneda
-qc = QuantumCircuit(q_posicion + 1) #Añadimos el qubit del spin
+qc = QuantumCircuit(q_posicion + 1) 
 
 #Se necesita conocer el valor en binario del centro, para hacer más eficiente el programa
 centro_binario = format(centro, f'0{q_posicion}b') #Se pasa el número a binario y se añaden los ceros que sean necesarios para completar la cadena de qubits

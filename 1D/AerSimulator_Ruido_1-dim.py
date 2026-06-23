@@ -22,7 +22,7 @@ directorio = os.path.dirname(__file__)
 ruta = os.path.join(directorio,archivo)
 
 #Se define el circuito cuántico con los cúbits de posición más un cúbit moneda
-qc = QuantumCircuit(q_posicion + 1) #Añadimos el qubit del spin
+qc = QuantumCircuit(q_posicion + 1) 
 
 #Se necesita conocer el valor en binario del centro, para hacer más eficiente el programa
 centro_binario = format(centro, f'0{q_posicion}b') #Se pasa el número a binario y se añaden los ceros que sean necesarios para completar la cadena de qubits
@@ -71,7 +71,7 @@ for _ in range(pasos):
 #Añadimos los operadores de medida
 qc.measure_all()
 
-#Llamamos al simulador
+#Llamamos a IBM
 service = QiskitRuntimeService()
 #Definimos el ordenador que queremos usar.
 #NOTA: Para que esto funciona debe haberse conectado previamente con la API y la instancia correpondiente y 
@@ -84,7 +84,7 @@ noise_model=NoiseModel.from_backend(backend)
 qc_transpilado = transpile(qc, backend=backend)
 #Realizamos la simulación
 sim=AerSimulator(noise_model=noise_model)
-
+#Definimos el resultado con el simulador e indicando el número de veces que queremos que se ejecute (shots)
 result=sim.run(qc_transpilado, shots=10000).result()
 
 #Obtenemos cada resultado
