@@ -78,7 +78,7 @@ pos_prob = np.zeros(num_max_pos)
 
 for bit_pos, prob_pos in probs.items(): #Recorremos la lista, mirando cada bit y su probabilidad
     pos_decimal = int(bit_pos[:-1], 2) #Se quita el último cúbit, que es el de la moneda, y se pasa de binario a decimal
-    pos_prob[pos_decimal] += prob_pos
+    pos_prob[pos_decimal] += prob_pos #Sumamos todas las probabilidades de la posición, ignorando el estado moneda
 
 
 #Abrimos el archivo antes definido y copiamos los datos
