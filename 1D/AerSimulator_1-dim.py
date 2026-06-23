@@ -100,7 +100,7 @@ with open(ruta, mode = 'w', newline = '', encoding = 'utf-8') as file:
 #suma = np.sum(pos_prob)
 #print(suma)
 
-#Quito los impares, ya que su probabilidad es nula
+#Quito los impares, ya que su probabilidad es nula teóricamente
 posiciones = np.arange(num_max_pos) - centro
 
 quitarImpares = (posiciones%2 == 0)
