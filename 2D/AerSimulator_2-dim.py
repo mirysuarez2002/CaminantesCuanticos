@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import csv
 import os
 from qiskit import QuantumCircuit
-from qiskit.quantum_info import Statevector
 from qiskit_aer import AerSimulator
 
 #Se definen los cúbits que se van a necesitar para la posición, tanto en una dimensión como en otra, ya que darán los mismo pasos en las dos direcciones. 
