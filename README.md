@@ -25,6 +25,6 @@ El repositorio se organiza en dos carpetas simétricas, una para una sola dimens
     * 'CalculoKL_2D': Contiene todos los archivos de datos '.csv' que se necesitan y los dos programas de cálculo de divergencia KL, uno de la distribución teórica con el hardware real ('KL_2-dim.py') y otro para la comparación de la distribución del simulador con ruido con hardware real ('KL_ruido_2-dim.py')
 
 ## Instalación necesaria
-Las librerias que se deben instalar son las siguientes:
+Las librerías que se deben instalar son las siguientes:
 
 pip install numpy matplotlib qiskit qiskit-aer qiskit-ibm-runtime
