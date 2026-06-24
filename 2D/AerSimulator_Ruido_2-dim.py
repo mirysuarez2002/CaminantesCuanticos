@@ -139,7 +139,8 @@ with open(ruta, mode = 'w', newline = '', encoding = 'utf-8') as file:
 #suma = np.sum(pos_prob)
 #print(suma)
 
-#Quito los impares, ya que su probabilidad es nula
+#Quito los impares, ya que su probabilidad es nula teóricamente
+#Seguramente en este caso no lo sea, pero para poder comparar las gráficas también se dejan fuera los impares
 Z_completa = pos_prob.reshape(num_max_pos,num_max_pos)
 
 posiciones = np.arange(num_max_pos) - centro
