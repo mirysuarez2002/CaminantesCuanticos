@@ -1,7 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import csv
-import os
 from qiskit import QuantumCircuit, transpile
 from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
 
