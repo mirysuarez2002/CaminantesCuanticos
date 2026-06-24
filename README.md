@@ -8,9 +8,8 @@ El trabajo consiste en la implementación de caminantes aleatorios cuánticos di
     3. Simulación local con ruido: Usa AerSimulator con ruido.
     4. Hardware real: A través de la prataforma IBM Quantum Platform se hace uso de varios ordenadores cuánticos con procesador Heron.
 
-    Estas distintas ejecuciones son comparadas y se discuten los distintos resultados.
+Estas distintas ejecuciones son comparadas y se discuten los distintos resultados.
 
 
-    ## Estructura del Repositorio
-
+## Estructura del Repositorio
     
