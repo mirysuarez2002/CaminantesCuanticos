@@ -59,14 +59,14 @@ for _ in range(pasos):
         controles = [0] + list(range(2, i))
         qc.mcx(controles, i)
 
-    #Movemos a la arriba cuando sea necesario: Usamos una puerta multicontrolada para cada qubit 
+    #Movemos hacia arriba cuando sea necesario: Usamos una puerta multicontrolada para cada qubit 
     for i in range(q_posicion_1D*2+1, q_posicion_1D+1, -1):
         controles = [1] + list(range(q_posicion_1D+2, i))
         qc.mcx(controles, i)
 
 
     
-    #Movemos a la izquierda y abajo cuando sea necesario: Usamos una puerta multicontrolada para cada qubit
+    #Movemos a la izquierda y hacia abajo cuando sea necesario: Usamos una puerta multicontrolada para cada qubit
     #Aplicamos las puertas X
     qc.x(0)
     qc.x(1)

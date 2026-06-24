@@ -2,8 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 import os
-from qiskit import QuantumCircuit
+from qiskit import QuantumCircuit, transpile
+from qiskit_ibm_runtime import QiskitRuntimeService
 from qiskit_aer import AerSimulator
+from qiskit_aer.noise import NoiseModel
 
 #Se definen los cúbits que se van a necesitar para la posición, tanto en una dimensión como en otra, ya que darán los mismo pasos en las dos direcciones. 
 #Estos se corresponden exactamente con el logaritmo en base dos de doble del número de pasos más uno, que se corresponde con la posición 0.
@@ -15,9 +17,10 @@ pasos = 10
 #por lo que la posición centro no tendrá el mismo número de posiciones a cada lado.
 centro = num_max_pos // 2 
 #Se define el archivo que guardará los valores de las posiciones y sus probabilidades.
-archivo = "hadamard_simOrdenador_10.csv"
+archivo = "hadamard_SimOrdenador_Ruido_aachen_10.csv"
 directorio = os.path.dirname(__file__)
 ruta = os.path.join(directorio,archivo)
+
 
 #Se define el circuito cuántico con los cúbits de posición de ambas dimensiones más dos cúbits moneda, uno por dimensión
 qc = QuantumCircuit(q_posicion_1D*2 + 2) #Añadimos los qubits de la moneda
@@ -93,10 +96,21 @@ for _ in range(pasos):
 #Añadimos los operadores de medida
 qc.measure_all()
 
-#Llamamos al simulador
-sim=AerSimulator()
+#Llamamos a IBM
+service = QiskitRuntimeService()
+#Definimos el ordenador que queremos usar.
+#NOTA: Para que esto funciona debe haberse conectado previamente con la API y la instancia correpondiente y 
+#el ordenado que se quiera utilizar debe estar disponible para esa instancia
+backend = service.backend("ibm_aachen")
+
+#Llamamos al modelo de ruido de ese ordenador
+noise_model=NoiseModel.from_backend(backend)
+#Transpilamos el circuito para ese ordenador
+qc_transpilado = transpile(qc, backend=backend)
+#Realizamos la simulación
+sim=AerSimulator(noise_model=noise_model)
 #Definimos el resultado con el simulador e indicando el número de veces que queremos que se ejecute (shots)
-result=sim.run(qc, shots=10000).result()
+result=sim.run(qc_transpilado, shots=10000).result()
 
 #Obtenemos cada resultado
 counts=result.get_counts()
@@ -121,13 +135,11 @@ with open(ruta, mode = 'w', newline = '', encoding = 'utf-8') as file:
     for (pos_decimal_horizontal, pos_decimal_vertical), prob in np.ndenumerate(pos_prob):
         writer.writerow([pos_decimal_horizontal - centro, pos_decimal_vertical - centro, prob])
 
-
-
 #Compruebo que las probabilidades suman 1
 #suma = np.sum(pos_prob)
 #print(suma)
 
-#Quito los impares, ya que su probabilidad es nula teóricamente
+#Quito los impares, ya que su probabilidad es nula
 Z_completa = pos_prob.reshape(num_max_pos,num_max_pos)
 
 posiciones = np.arange(num_max_pos) - centro
@@ -154,7 +166,7 @@ ax.set_xlabel('Eje X')
 ax.set_ylabel('Eje Y')
 ax.set_zlabel('Probabilidad')
 
-#Fijo el valor máximo en un punto un poco superior al máximo real (No dejo el valor real para usar exactamente el mismo en el resto de gráficas)
+#Para poder comparar las gráficas, se fija max_z como el valor máximo teórico
 #Para 2 pasos 0.25
 #Para 6 pasos 0.08
 #Para 10 pasos 0.07
