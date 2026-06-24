@@ -23,3 +23,8 @@ El repositorio se organiza en dos carpetas simétricas, una para una sola dimens
     * 5 programas .py para las ejecuciones (la ejecución en Hardware real tiene dos archivos, debido a que primero se envía el trabajo y luego se realiza la lectura)
     * 'CalculoCubits_Prof_Puertas': Contiene un archivo que calcula como crecen el número de cúbits, la profundidad y el número de puertas en función del paso.
     * 'CalculoCubits_Prof_Puertas': Contiene todos los archivos de datos '.csv' que se necesitan y los dos programas de cálculo de divergencia KL, uno de la distribución teórica con el hardware real ('KL_2-dim.py') y otro para la comparación de la distribución del simulador con ruido con hardware real ('KL_ruido_2-dim.py')
+
+## Instalación necesaria
+Las librerias que se deben instalar son las siguientes:
+
+pip install numpy matplotlib qiskit qiskit-aer qiskit-ibm-runtime
