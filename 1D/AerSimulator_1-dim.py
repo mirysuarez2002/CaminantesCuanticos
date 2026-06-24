@@ -83,7 +83,7 @@ total_shots = sum(counts.values())
 #Creamos el vector de probabilidades vacio
 pos_prob = np.zeros((num_max_pos))
 
-for bit_pos, n_veces in counts.items(): #Recorremos el lista, mirando cada bit y su probabilidad
+for bit_pos, n_veces in counts.items(): #Recorremos la lista, mirando cada bit y su probabilidad
     pos_decimal = int(bit_pos[:-1], 2) #Se quita el último cúbit, que es el de la moneda, y se pasa de binario a decimal
     prob = n_veces/total_shots #Calculamos la probabilidad dividiendo las veces que ha terminado en esa posición entre el número de shots
     pos_prob[pos_decimal] += prob #Sumamos todas las probabilidades de la posición, ignorando el estado moneda

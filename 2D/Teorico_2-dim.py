@@ -96,7 +96,7 @@ probs = estado.probabilities_dict() #Escribe un listado con los bits y las proba
 #Creamos el vector de probabilidades vacio
 pos_prob = np.zeros((num_max_pos, num_max_pos))
 
-for bit_pos, prob_pos in probs.items(): #Recorremos el lista, mirando cada bit y su probabilidad
+for bit_pos, prob_pos in probs.items(): #Recorremos la lista, mirando cada bit y su probabilidad
     bit_sin_Control = bit_pos[:-2] #Se quitan los últimos dos cúbits, que son los cúbits moneda
     pos_decimal_horizontal = int(bit_sin_Control[q_posicion_1D:], 2) #Me quedo con la segunda mitad del string de cúbits de posiciones y pasamos a binario, que corresponde con la posición horizontal
     pos_decimal_vertical = int(bit_sin_Control[:q_posicion_1D], 2) #Hago lo mismo con la primera mitad. Es la posición vertical.

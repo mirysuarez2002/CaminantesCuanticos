@@ -2,8 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 import os
-from qiskit import QuantumCircuit, transpile
-from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
+from qiskit_ibm_runtime import QiskitRuntimeService
 
 #Se definen los cúbits que se van a necesitar para la posición. 
 #Estos se corresponden exactamente con el logaritmo en base dos de doble del número de pasos más uno, que se corresponde con la posición 0.
@@ -32,7 +31,7 @@ print(f"Estado del trabajo: {job.status()}")
 
 #Si está terminado recoge los datos igual 
 #que el resto de archivos y pinta la gráfica correspondiente y copia los datos en el archivo.
-#Si aún no ha terminado lo muestra por pantalla
+#Si aún no ha terminado lo dice por pantalla
 if job.status() == 'DONE':
     result = job.result()
     pub_result = result[0]
@@ -43,7 +42,7 @@ if job.status() == 'DONE':
     #Creamos el vector de probabilidades vacio
     pos_prob = np.zeros((num_max_pos))
 
-    for bit_pos, n_veces in counts.items(): #Recorremos el lista, mirando cada bit y su probabilidad
+    for bit_pos, n_veces in counts.items(): #Recorremos la lista, mirando cada bit y su probabilidad
         pos_decimal = int(bit_pos[:-1], 2) 
         prob = n_veces/total_shots
         pos_prob[pos_decimal] += prob
